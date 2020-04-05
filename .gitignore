@@ -1,0 +1,4 @@
+.envrc
+.terraform
+.state
+Makefile
