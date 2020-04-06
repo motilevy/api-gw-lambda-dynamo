@@ -21,6 +21,5 @@ resource "aws_security_group" "lambda" {
     Name = "lambda-${var.name}"
   }
 
-  depends_on = [aws_iam_role.external]
 }
 

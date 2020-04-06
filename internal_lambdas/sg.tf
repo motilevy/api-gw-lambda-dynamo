@@ -20,6 +20,5 @@ resource "aws_security_group" "lambda" {
   tags = {
     Name = "lambda-${var.name}"
   }
-  depends_on = [aws_iam_role.role]
 }
 

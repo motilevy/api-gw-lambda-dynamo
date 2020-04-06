@@ -36,7 +36,7 @@ resource "aws_lambda_function" "func" {
     create = "2m"
   }
 
-  depends_on = [aws_security_group.lambda, aws_iam_role.external]
+  depends_on = [aws_security_group.lambda, aws_iam_role.external, aws_iam_role_policy_attachment.external]
 }
 
 output "all" {

@@ -13,7 +13,7 @@ data "archive_file" "zip" {
 resource "aws_lambda_function" "func" {
   for_each         = { for x in local.lambdas : x => x }
   function_name    = "${each.value}-internal-${var.name}"
-  role             = aws_iam_role.role.arn
+  role             = aws_iam_role.internal.arn
   handler          = "main.lambda_handler"
   description      = "${each.value} function"
   runtime          = "python3.7"
@@ -32,10 +32,7 @@ resource "aws_lambda_function" "func" {
       TABLE = var.table_name
     }
   }
-  timeouts {
-    create = "2m"
-  }
-  depends_on = [aws_security_group.lambda, aws_iam_role.role]
+  depends_on = [aws_security_group.lambda, aws_iam_role.internal, aws_iam_role_policy_attachment.internal]
 }
 output "all" {
   value = aws_lambda_function.func

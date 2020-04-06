@@ -1,4 +1,4 @@
-resource "aws_iam_role" "role" {
+resource "aws_iam_role" "internal" {
   name               = "internal-${var.name}"
   description        = "role for internal lambdas"
   assume_role_policy = data.aws_iam_policy_document.sts.json
@@ -62,8 +62,8 @@ resource "aws_iam_policy" "lambda" {
   policy      = data.aws_iam_policy_document.lambda.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda" {
-  role       = aws_iam_role.role.name
+resource "aws_iam_role_policy_attachment" "internal" {
+  role       = aws_iam_role.internal.name
   policy_arn = aws_iam_policy.lambda.arn
 }
 
